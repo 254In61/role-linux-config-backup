@@ -4,7 +4,7 @@
   ansible.builtin.file: 
     path: "{{ inventory_hostname }}-config.txt"
     state: touch
-  delegate_to: localhost
+  # delegate_to: localhost
 
 - name: Collect some data and write on the file
   ansible.builtin.command:
@@ -15,3 +15,7 @@
   ansible.builtin.command:
     cmd: "cat {{ inventory_hostname }}-config.txt"
   register: config_output
+
+- name: Display the stored content
+  ansible.builtin.debug:
+    var: ls_output.stdout
