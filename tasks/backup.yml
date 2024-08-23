@@ -12,6 +12,6 @@
 
 - name: Save the configuration to the local host /tmp/ file
   ansible.builtin.copy:
-    content: "{{ config_output["stdout"] }}"
+    content: "{{ config_output['stdout'] }}"
     dest: "{{ tmp_configs_store }}"
   delegate_to: localhost
