@@ -2,5 +2,5 @@
 # Test tasks to run on remote linux boxes to confirm if role works file
 - name: Collect linux device running configs
   ansible.builtin.command:
-    cmd: cat ~/developer/random-file.txt
+    cmd: "cat {{ test_config_file }}" # Reading a file as test
   register: linux_config_output
