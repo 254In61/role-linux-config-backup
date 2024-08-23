@@ -8,7 +8,7 @@
 
 - name: Display the stored content
   ansible.builtin.debug:
-    var: configs.stdout[0]
+    var: config_output
 
 - name: Save the configuration to the local host /tmp/ file
   ansible.builtin.copy:
