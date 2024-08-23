@@ -1,14 +1,14 @@
 ---
 # linux config backup
 
-# some random command to simulate the configs collection
-- name: Collect linux device running configs
+# This simulate collection of running configs in devices
+- name: Collect device running configs
   ansible.builtin.shell: "ls -al $HOME"
   register: config_output
 
-- name: Display the stored content
-  ansible.builtin.debug:
-    var: config_output["stdout"]
+# - name: Display the stored content
+#   ansible.builtin.debug:
+#     var: config_output["stdout"]
 
 - name: Save the configuration to the local host /tmp/ file
   ansible.builtin.copy:
