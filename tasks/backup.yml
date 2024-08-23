@@ -3,7 +3,7 @@
 - name: Create a file to write stuff on
   ansible.builtin.file: 
     path: "{{ test_config_file }}"
-
+    state: touch
 
 - name: Collect some data and write on the file
   ansible.builtin.command:
