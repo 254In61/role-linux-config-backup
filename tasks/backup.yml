@@ -1,15 +1,32 @@
 ---
 # Test tasks to run on remote linux boxes to confirm if role works file
-- name: Create a file to write stuff on
-  ansible.builtin.shell: "ls -al > /tmp/{{ inventory_hostname }}-config.txt"
-  args:
-    executable: /bin/bash
+- name: Create a temporary local file to hold configs
+  ansible.builtin.file: 
+    path: "{{ tmp_configs_store }}"
+    state: touch
+  delegate_to: localhost
 
-- name: Read the file contents
-  ansible.builtin.command:
-    cmd: "cat /tmp/{{ inventory_hostname }}-config.txt"
+- name: Run a command to simulate device configs collection
+  ansible.builtin.shell: ls -al
   register: config_output
 
-- name: Display the stored content
-  ansible.builtin.debug:
-    var: config_output.stdout
+- name: Save the configuration to the local host /tmp/ file
+  ansible.builtin.copy:
+    content: "{{ config_output.stdout[0] }}"
+    dest: "{{ tmp_configs_store }}"
+  delegate_to: localhost
+
+# - name: Create a file to write stuff on
+#   ansible.builtin.shell: "ls -al > /tmp/{{ inventory_hostname }}-config.txt"
+#   args:
+#     executable: /bin/bash
+
+# ** In the device backups flow, one will write the stdout[0] on the file.
+# - name: Read the file contents
+#   ansible.builtin.command:
+#     cmd: "cat /tmp/{{ inventory_hostname }}-config.txt"
+#   register: configs
+
+# - name: Display the stored content
+#   ansible.builtin.debug:
+#     var: configs.stdout
