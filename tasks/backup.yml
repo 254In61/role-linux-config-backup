@@ -1,6 +1,16 @@
 ---
 # Test tasks to run on remote linux boxes to confirm if role works file
-- name: Collect linux device running configs
+- name: Create a file to write stuff on
+  ansible.builtin.file: 
+    path: "{{ test_config_file }}"
+
+
+- name: Collect some data and write on the file
   ansible.builtin.command:
-    cmd: "cat {{ test_config_file }}" # Reading a file as test
-  register: linux_config_output
+    cmd: " date >> {{ test_config_file }} && ls -al >> {{ test_config_file }}" # Reading a file as test
+  # register: linux_config_output
+
+- name: Read the random file
+  ansible.builtin.command:
+    cmd: "cat {{ test_config_file }}"
+  register: config_output
