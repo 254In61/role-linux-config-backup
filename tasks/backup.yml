@@ -3,7 +3,7 @@
 
 # This simulate collection of running configs in devices
 - name: Collect device running configs
-  ansible.builtin.shell: "ls -al $HOME"
+  ansible.builtin.shell: "ls -al $HOME && date" # date cmd ensures change in file content
   register: config_output
 
 # - name: Display the stored content
