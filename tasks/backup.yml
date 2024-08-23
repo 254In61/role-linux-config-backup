@@ -2,15 +2,16 @@
 # Test tasks to run on remote linux boxes to confirm if role works file
 - name: Create a file to write stuff on
   ansible.builtin.file: 
-    path: "{{ test_config_file }}"
+    path: "{{ inventory_hostname }}-config.txt"
     state: touch
+  delegate_to: localhost
 
 - name: Collect some data and write on the file
   ansible.builtin.command:
-    cmd: " date >> {{ test_config_file }} && ls -al >> {{ test_config_file }}" # Reading a file as test
+    cmd: "ls -al >> {{ inventory_hostname }}-config.txt" # Reading a file as test
   # register: linux_config_output
 
 - name: Read the random file
   ansible.builtin.command:
-    cmd: "cat {{ test_config_file }}"
+    cmd: "cat {{ inventory_hostname }}-config.txt"
   register: config_output
