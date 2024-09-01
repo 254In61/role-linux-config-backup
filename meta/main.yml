@@ -1,6 +1,6 @@
 galaxy_info:
   author: Allan Maseghe
-  description: contains tasks that backup the running configurations of linux devices
+  description: A test role to simulate configs backup of linux devices
   company: Red Hat
 
   license: license (GPL-2.0-or-later, MIT, etc)

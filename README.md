@@ -1,5 +1,7 @@
 # role-linux-config-backup
-Role contains tasks that perform config backup of linux devices
+Role contains tasks that SIMULATE configs backups on Linux devices.
+
+This is just a test role
 
 # Requirements
 - Minimum ansible 2.11
