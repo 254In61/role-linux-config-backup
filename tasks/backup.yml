@@ -1,17 +1,11 @@
 ---
-# linux config backup
-
-# This simulate collection of running configs in devices
-- name: Collect device running configs
-  ansible.builtin.shell: "date && ls -al $HOME" # date cmd ensures change in file content
+# Simulate network device running config collection
+- name: Simulate Collection of device running configs
+  ansible.builtin.shell: "date && ls -al"
   register: config_output
 
-# - name: Display the stored content
-#   ansible.builtin.debug:
-#     var: config_output["stdout"]
-
-- name: Save the configuration to the local host /tmp/ file
+- name: Save the configuration to the temporary config store
   ansible.builtin.copy:
     content: "{{ config_output['stdout'] }}"
-    dest: "{{ tmp_configs_store }}"
+    dest: "{{ tmp_config_store }}"
   delegate_to: localhost
